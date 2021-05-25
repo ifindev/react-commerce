@@ -16,26 +16,27 @@ const CartItem = ({ item }) => {
   const classes = useStyles()
   return (
     <div>
-      <Card>
+      <Card className={classes.card}>
         <CardMedia
           image={item.media.source}
           alt={item.name}
           className={classes.media}
         />
         <CardContent className={classes.cardContent}>
-          <Typography variant="h4">{item.name}</Typography>
-          <Typography variant="h5">
-            {item.line_total.formatted_with_symbol}
-          </Typography>
+          <div>
+            <Typography variant="h5">
+              {' '}
+              <strong> {item.name}</strong>
+            </Typography>
+          </div>
+          <div style={{ marginTop: '10px' }}>
+            <Typography variant="h6">
+              {item.line_total.formatted_with_symbol}
+            </Typography>
+          </div>
         </CardContent>
-        <CardActions className={classes.CardActions}>
+        <CardActions className={classes.cardActions}>
           <div className={classes.buttons}>
-            {/* <Button type="button" size="small">
-              -
-            </Button>
-            <Button type="button" size="small">
-              +
-            </Button> */}
             <IconButton>
               <RemoveCircle color="secondary" />
             </IconButton>
