@@ -19,7 +19,7 @@ const Product = ({ product }) => {
       <Card className={classes.root}>
         <CardMedia
           className={classes.media}
-          image={product.image}
+          image={product.media.source}
           title={product.name}
         />
         <CardContent>
@@ -28,7 +28,7 @@ const Product = ({ product }) => {
               {product.name}
             </Typography>
             <Typography variant="h6" gutterBottom>
-              {product.price}
+              {product.price.formatted_with_symbol}
             </Typography>
           </div>
           <Typography variant="body2" color="textSecondary">
