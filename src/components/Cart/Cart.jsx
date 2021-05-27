@@ -30,9 +30,9 @@ const Cart = ({
 
   const FilledCart = () => (
     <>
-      <Grid container spacing={3}>
+      <Grid container spacing={4}>
         {cart.line_items.map((item) => (
-          <Grid item xs={12} sm={6} lg={3} key={item.id}>
+          <Grid item xs={12} sm={6} md={4} lg={3} key={item.id}>
             <CartItem
               item={item}
               onUpdateCartQty={handleUpdateCartQty}
