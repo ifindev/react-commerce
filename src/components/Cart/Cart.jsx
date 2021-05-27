@@ -5,57 +5,70 @@ import { Link } from 'react-router-dom'
 import useStyles from './styles'
 import CartItem from './CartItem/CartItem'
 
-const Cart = ({ cart }) => {
+const Cart = ({
+  cart,
+  handleUpdateCartQty,
+  handleRemoveFromCart,
+  handleEmptyCart,
+}) => {
   const classes = useStyles()
 
-  const isEmpty = cart.line_items !== undefined ? cart.line_items === 0 : false
+  const isEmpty =
+    cart.line_items !== undefined ? cart.line_items.length === 0 : true
 
   const EmptyCart = () => (
     <Typography variant="subtitle1">
-      You have no items in your shopping cart,
-      <Link to="/">start adding some!</Link>
+      You have no items in your shopping cart,{' '}
+      <Link to="/">
+        <strong>start adding some!</strong>
+      </Link>
     </Typography>
   )
 
   console.log(cart)
+  console.log(cart.line_items)
 
-  const FilledCart = () =>
-    !isEmpty && (
-      <>
-        <Grid container spacing={3}>
-          {cart.line_items.map((item) => (
-            <Grid item xs={12} sm={6} lg={3} key={item.id}>
-              <CartItem item={item} />
-            </Grid>
-          ))}
-        </Grid>
-        <div className={classes.cardDetails}>
-          <Typography variant="h4">
-            Subtotal: {cart.subtotal.formatted_with_symbol}
-          </Typography>
-          <div>
-            <Button
-              className={classes.emptyButton}
-              size="large"
-              type="button"
-              variant="contained"
-              color="secondary"
-            >
-              Empty cart
-            </Button>
-            <Button
-              className={classes.checkoutButton}
-              size="large"
-              type="button"
-              variant="contained"
-              color="primary"
-            >
-              Checkout
-            </Button>
-          </div>
+  const FilledCart = () => (
+    <>
+      <Grid container spacing={3}>
+        {cart.line_items.map((item) => (
+          <Grid item xs={12} sm={6} lg={3} key={item.id}>
+            <CartItem
+              item={item}
+              onUpdateCartQty={handleUpdateCartQty}
+              onRemoveFromCart={handleRemoveFromCart}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <div className={classes.cardDetails}>
+        <Typography variant="h4">
+          Subtotal: {cart.subtotal.formatted_with_symbol}
+        </Typography>
+        <div>
+          <Button
+            className={classes.emptyButton}
+            size="large"
+            type="button"
+            variant="contained"
+            color="secondary"
+            onClick={handleEmptyCart}
+          >
+            Empty cart
+          </Button>
+          <Button
+            className={classes.checkoutButton}
+            size="large"
+            type="button"
+            variant="contained"
+            color="primary"
+          >
+            Checkout
+          </Button>
         </div>
-      </>
-    )
+      </div>
+    </>
+  )
 
   if (!cart.line_items) return <div>Loading...</div>
 

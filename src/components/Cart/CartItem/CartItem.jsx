@@ -12,7 +12,7 @@ import { AddCircle, RemoveCircle } from '@material-ui/icons'
 
 import useStyles from './styles'
 
-const CartItem = ({ item }) => {
+const CartItem = ({ item, onUpdateCartQty, onRemoveFromCart }) => {
   const classes = useStyles()
   return (
     <div>
@@ -37,15 +37,24 @@ const CartItem = ({ item }) => {
         </CardContent>
         <CardActions className={classes.cardActions}>
           <div className={classes.buttons}>
-            <IconButton>
+            <IconButton
+              onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}
+            >
               <RemoveCircle color="secondary" />
             </IconButton>
             <Typography>{item.quantity}</Typography>
-            <IconButton>
+            <IconButton
+              onClick={() => onUpdateCartQty(item.id, item.quantity + 1)}
+            >
               <AddCircle color="primary" />
             </IconButton>
           </div>
-          <Button variant="contained" type="button" color="secondary">
+          <Button
+            variant="contained"
+            type="button"
+            color="secondary"
+            onClick={() => onRemoveFromCart(item.id)}
+          >
             Remove
           </Button>
         </CardActions>
