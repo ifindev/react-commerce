@@ -17,7 +17,7 @@ export default makeStyles(() => ({
   },
   cardActions: {
     marginTop: 'auto',
-    justifyContent: 'space-between',
-    marginBottom: '10px',
+    display: 'flex',
+    justifyContent: 'flex-end',
   },
 }))
